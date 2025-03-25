@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM Fraud Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ATM Fraud Detection</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label>Amount: <input type="number" name="amount" step="0.01" required></label>
+            </div>
+            <div class="form-group">
+                <label>Time (0-23.99): <input type="number" name="time" min="0" max="23.99" step="0.01" required></label>
+            </div>
+            <div class="form-group">
+                <label>Location (1-10): <input type="number" name="location" min="1" max="10" required></label>
+            </div>
+            <div class="form-group">
+                <label>Type (1=Cash, 2=Transfer, 3=Balance): 
+                    <input type="number" name="transaction_type" min="1" max="3" required>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Balance: <input type="number" name="balance" step="0.01" required></label>
+            </div>
+            <div class="form-group">
+                <label>Frequency: <input type="number" name="frequency" min="0" required></label>
+            </div>
+            <button type="submit">Check Transaction</button>
+        </form>
+
+        {% if result %}
+        <div class="result {{ 'fraud' if 'Fraudulent' in result else 'legit' }}">
+            {{ result }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
